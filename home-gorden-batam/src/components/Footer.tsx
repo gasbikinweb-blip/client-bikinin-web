@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { getAllProducts } from '@/data/products';
 import { siteConfig } from '@/lib/config';
 import { buildWhatsAppLink, generalMessage } from '@/lib/whatsapp';
@@ -37,7 +38,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm text-muted">
             {navLinks.map((l) => (
               <li key={l.href}>
-                <a href={l.href} className="transition-colors hover:text-accent-strong">
+                <a href={`/${l.href}`} className="transition-colors hover:text-accent-strong">
                   {l.label}
                 </a>
               </li>
@@ -50,15 +51,23 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm text-muted">
             {featuredProducts.map((p) => (
               <li key={p.slug}>
-                <a href="#katalog" className="transition-colors hover:text-accent-strong">
+                <Link
+                  href={`/produk/${p.slug}`}
+                  className="transition-colors hover:text-accent-strong"
+                >
                   {p.name}
-                </a>
+                </Link>
               </li>
             ))}
             <li>
-              <a href="#katalog" className="font-medium text-accent hover:text-accent-strong">
+              <Link href="/produk" className="font-medium text-accent hover:text-accent-strong">
                 Lihat Semua Katalog →
-              </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/faq" className="transition-colors hover:text-accent-strong">
+                Pertanyaan Umum (FAQ)
+              </Link>
             </li>
           </ul>
         </div>

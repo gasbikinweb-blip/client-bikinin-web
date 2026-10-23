@@ -56,7 +56,7 @@ Seluruh konten website disimpan di dalam kode (`src/data/` dan `src/lib/config.t
    - Salin `.env.example` menjadi `.env.local` lalu sesuaikan:
      - `NEXT_PUBLIC_WA_NUMBER=6282162725097` (format internasional hanya angka, tanpa `+`, spasi, atau tanda hubung)
      - `NEXT_PUBLIC_SITE_NAME="Home Gorden Batam"`
-     - `NEXT_PUBLIC_SITE_URL="https://homegordenbatam.com"`
+     - `NEXT_PUBLIC_SITE_URL="https://gordeninteriorbatam.web.id"`
    - Detail alamat, jam operasional, dan link sosial media dapat diedit langsung di [`src/lib/config.ts`](src/lib/config.ts).
    - Seluruh pembuatan tautan WhatsApp terpusat di [`src/lib/whatsapp.ts`](src/lib/whatsapp.ts) melalui fungsi `buildWhatsAppLink()`.
 

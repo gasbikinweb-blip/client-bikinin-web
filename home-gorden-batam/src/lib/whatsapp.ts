@@ -17,8 +17,8 @@ export type ProductInquiry = {
   suitableRooms?: readonly string[];
 };
 
-/** URL absolut katalog di landing page */
-export const productUrl = (slug: string) => `${new URL('/', siteConfig.url).href}#katalog-${slug}`;
+/** URL absolut halaman detail produk */
+export const productUrl = (slug: string) => new URL(`/produk/${slug}`, siteConfig.url).href;
 
 /**
  * Pesan otomatis berisi nama produk + detail spesifikasi.

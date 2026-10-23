@@ -14,7 +14,7 @@ export function DesktopNav() {
           return (
             <li key={l.href} className="shrink-0">
               <a
-                href={l.href}
+                href={`/${l.href}`}
                 aria-current={isActive ? 'location' : undefined}
                 className={`relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 whitespace-nowrap transition-all duration-300 after:absolute after:right-3 after:bottom-0.5 after:left-3 after:h-0.5 after:rounded-full after:bg-accent after:transition-transform after:duration-300 ${
                   isActive

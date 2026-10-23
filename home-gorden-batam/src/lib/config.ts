@@ -26,7 +26,7 @@ export const siteConfig = {
   description:
     'Jasa pembuatan dan pemasangan gorden custom, vitrase, gorden minimalis, blackout, vertical/horizontal/roller blinds, wallpaper vinyl, dan rell besi di Batam. Gratis survei dan pengukuran ke seluruh area Batam.',
   // TODO: ganti dengan domain production resmi setelah rilis
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://homegordenbatam.com',
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://gordeninteriorbatam.web.id',
   waNumber,
   waDisplay: '0821-6272-5097',
   instagram: 'https://www.instagram.com/homegordenbatam',

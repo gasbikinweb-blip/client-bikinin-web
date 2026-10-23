@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { type NavHref, navLinks } from './nav-links';
 
@@ -8,10 +9,13 @@ import { type NavHref, navLinks } from './nav-links';
  * Melacak section mana yang sedang berada di area baca layar (viewport),
  * lalu mengembalikan href aktif (misalnya '#katalog' atau '#portofolio').
  */
-export function useActiveSection(): NavHref {
+export function useActiveSection(): NavHref | null {
   const [activeHref, setActiveHref] = useState<NavHref>('#beranda');
+  // Di halaman selain beranda (mis. /produk, /faq) tidak ada section yang aktif
+  const isHome = usePathname() === '/';
 
   useEffect(() => {
+    if (!isHome) return;
     const sectionIds = navLinks.map((link) => link.href.slice(1));
 
     const updateActiveSection = () => {
@@ -49,7 +53,7 @@ export function useActiveSection(): NavHref {
       window.removeEventListener('scroll', updateActiveSection);
       window.removeEventListener('resize', updateActiveSection);
     };
-  }, []);
+  }, [isHome]);
 
-  return activeHref;
+  return isHome ? activeHref : null;
 }

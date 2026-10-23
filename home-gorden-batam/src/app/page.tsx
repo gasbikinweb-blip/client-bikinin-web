@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { AboutSection } from '@/components/AboutSection';
 import { ArrowIcon, PlusIcon } from '@/components/icons';
 import { OrderSteps } from '@/components/OrderSteps';
@@ -112,6 +113,14 @@ export default function HomePage() {
           <div className="mt-12">
             <ProductCatalog products={allProducts} categories={categories} />
           </div>
+          <p className="mt-10 text-center">
+            <Link
+              href="/produk"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:text-accent-strong"
+            >
+              Buka halaman katalog lengkap <ArrowIcon className="size-4" />
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -184,6 +193,12 @@ export default function HomePage() {
               </details>
             ))}
           </div>
+          <Link
+            href="/faq"
+            className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:text-accent-strong"
+          >
+            Lihat semua pertanyaan <ArrowIcon className="size-4" />
+          </Link>
         </div>
       </section>
 
