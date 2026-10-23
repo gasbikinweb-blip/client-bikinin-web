@@ -1,0 +1,6 @@
+# Kontak pelaporan kerentanan keamanan website Home Gorden Batam
+# TODO: ganti dengan alamat email keamanan/kontak resmi pemilik usaha setelah tersedia
+Contact: https://wa.me/6282162725097
+Preferred-Languages: id, en
+Canonical: https://homegordenbatam.com/.well-known/security.txt
+Expires: 2027-12-31T23:59:59.000Z

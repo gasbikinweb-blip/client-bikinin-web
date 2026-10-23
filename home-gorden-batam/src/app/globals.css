@@ -1,0 +1,324 @@
+@import 'tailwindcss';
+
+/*
+ * Palet warna: Warm Luxury Light Editorial (Default) & Mode Gelap.
+ * Terinspirasi dari desain arsitektur interior modern: latar alabaster/warm-stone bersih,
+ * teks arang pekat (#1c1917), dan aksen champagne gold / warm bronze (#b58d53 / #8f6830).
+ * Kelas .theme-dark memaksa palet gelap di area tertentu (teks di atas foto/video hero).
+ */
+:root {
+  color-scheme: light;
+  --page: #f6f4f0;
+  --background: #f6f4f0;
+  --surface: #ece8e1;
+  --surface-2: #e2dcd2;
+  --foreground: #1c1917;
+  --muted: #5c544c;
+  --accent: #9a7338;
+  --accent-strong: #7a5822;
+  --navy: #1b2e47;
+  --sage: #4f6e55;
+  --line: rgb(28 25 23 / 0.12);
+}
+
+:root[data-theme='dark'],
+.theme-dark {
+  color-scheme: dark;
+  --background: #12100d;
+  --surface: #1b1713;
+  --surface-2: #26201a;
+  --foreground: #f5efe6;
+  --muted: #bdb09e;
+  --accent: #d4a359;
+  --accent-strong: #e8bd78;
+  --navy: #1d324c;
+  --sage: #8fae94;
+  --line: rgb(245 239 230 / 0.13);
+}
+
+:root[data-theme='dark'] {
+  --page: #12100d;
+}
+
+.theme-dark {
+  color: var(--foreground);
+}
+
+/* Transisi halus saat ganti tema (hanya warna) */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 0.5s ease,
+    border-color 0.5s ease,
+    color 0.5s ease !important;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-navy: var(--navy);
+  --color-sage: var(--sage);
+  --color-line: var(--line);
+  --color-page: var(--page);
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-cormorant);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+}
+
+/* ---------- Animasi ---------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes ken-burns {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes wa-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(37 211 102 / 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgb(37 211 102 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(37 211 102 / 0);
+  }
+}
+
+@keyframes scroll-dot {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+}
+
+/* Animasi masuk saat halaman dibuka (hero) */
+.animate-in {
+  animation: fade-up 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+.animate-ken-burns {
+  animation: ken-burns 14s ease-out both;
+}
+
+.animate-wa-pulse {
+  animation: wa-pulse 2.4s ease-out infinite;
+}
+
+.animate-scroll-dot {
+  animation: scroll-dot 1.6s ease-in-out infinite;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--duration, 40s) linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/*
+ * Muncul saat di-scroll (dipicu RevealObserver).
+ */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+}
+@keyframes reveal-left {
+  from {
+    opacity: 0;
+    transform: translateX(-72px);
+  }
+}
+@keyframes reveal-right {
+  from {
+    opacity: 0;
+    transform: translateX(72px);
+  }
+}
+@keyframes reveal-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+}
+@keyframes reveal-blur {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+    transform: translateY(24px);
+  }
+}
+
+.reveal-ready .reveal:not(.is-visible) {
+  opacity: 0;
+}
+.reveal.is-visible {
+  animation: reveal-up 0.95s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms) backwards;
+}
+.reveal.reveal-left.is-visible {
+  animation-name: reveal-left;
+}
+.reveal.reveal-right.is-visible {
+  animation-name: reveal-right;
+}
+.reveal.reveal-zoom.is-visible {
+  animation-name: reveal-zoom;
+}
+.reveal.reveal-blur.is-visible {
+  animation-name: reveal-blur;
+}
+
+/* Gambar yang tersingkap seperti tirai */
+@keyframes curtain {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+.reveal.reveal-curtain.is-visible {
+  animation-name: curtain;
+  animation-duration: 1.3s;
+}
+
+/* ---------- Room select ("pilih karakter") ---------- */
+@keyframes stage-in {
+  from {
+    opacity: 0;
+    transform: scale(1.14);
+    filter: blur(10px) saturate(0.4);
+  }
+}
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+@keyframes bob {
+  50% {
+    transform: translate(-50%, -5px);
+  }
+}
+@keyframes flash {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.animate-stage {
+  animation: stage-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-slide-in {
+  animation: slide-in-left 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-rise {
+  animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+.animate-bob {
+  animation: bob 1.2s ease-in-out infinite;
+}
+.animate-flash {
+  animation: flash 0.6s ease-out both;
+}
+
+/* ---------- Kutipan ---------- */
+@keyframes progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+.animate-quote {
+  animation: reveal-blur 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-progress {
+  animation: progress var(--duration, 7s) linear both;
+}
+
+/* Hormati pengguna yang meminta gerakan minimal */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
