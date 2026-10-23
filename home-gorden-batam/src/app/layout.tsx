@@ -24,6 +24,16 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   alternates: { canonical: '/' },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+    ],
+    apple: { url: '/apple-touch-icon.png', sizes: '180x180' },
+  },
+  manifest: '/site.webmanifest',
+  verification: { google: 'SB73t9kmNVy1Z3g4_YsCSh_ARnogrc4nxwqrrUDjpP8' },
   openGraph: {
     type: 'website',
     locale: 'id_ID',
