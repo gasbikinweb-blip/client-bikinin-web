@@ -173,10 +173,10 @@ export const targetClients = [
 
 // 12 Kecamatan Resmi di Kota Batam beserta kawasan populernya
 export const batamAreas = [
-  'Kec. Batam Kota (Batam Centre, Botania, Sukajadi)',
-  'Kec. Lubuk Baja (Nagoya, Baloi, Penuin)',
+  'Kec. Batam Kota (Batam Centre, Botania, Sukajadi, Sei Panas)',
+  'Kec. Lubuk Baja (Nagoya, Baloi Indah, Penuin)',
   'Kec. Bengkong (Bengkong Indah, Sadai, Tg. Buntung)',
-  'Kec. Batu Ampar (Jodoh, Sei Panas, Tg. Sengkuang)',
+  'Kec. Batu Ampar (Jodoh, Batu Merah, Tg. Sengkuang)',
   'Kec. Sekupang (Tiban, Patam Lestari, Tg. Riau)',
   'Kec. Batu Aji (Tanjung Uncang, Buliang, Kibing)',
   'Kec. Sagulung (Tembesi, Dapur 12, Sei Langkai)',

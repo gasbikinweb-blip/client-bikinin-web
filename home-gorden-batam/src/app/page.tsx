@@ -14,7 +14,7 @@ import { faqs } from '@/data/faq';
 import { getAllProducts, getCategories } from '@/data/products';
 import { quotes } from '@/data/quotes';
 import { getRooms } from '@/data/rooms';
-import { batamAreas } from '@/data/site';
+import { getAllAreas } from '@/data/areas';
 import { siteConfig } from '@/lib/config';
 
 const external = { target: '_blank', rel: 'noopener noreferrer' } as const;
@@ -238,9 +238,18 @@ export default function HomePage() {
                   <p className="text-[11px] font-semibold tracking-wider text-accent uppercase">
                     Area Layanan Survei Gratis:
                   </p>
-                  <p className="mt-1.5 text-xs leading-relaxed text-muted">
-                    {batamAreas.slice(0, 8).join(' • ')}, dan sekitarnya.
-                  </p>
+                  <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1.5 text-xs text-muted">
+                    {getAllAreas().map((a) => (
+                      <li key={a.slug}>
+                        <Link
+                          href={`/area/${a.slug}`}
+                          className="underline-offset-2 transition-colors hover:text-accent-strong hover:underline"
+                        >
+                          {a.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
               <div className="mt-6">

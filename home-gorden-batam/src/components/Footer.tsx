@@ -69,6 +69,11 @@ export function Footer() {
                 Pertanyaan Umum (FAQ)
               </Link>
             </li>
+            <li>
+              <Link href="/area" className="transition-colors hover:text-accent-strong">
+                Area Layanan se-Batam
+              </Link>
+            </li>
           </ul>
         </div>
 

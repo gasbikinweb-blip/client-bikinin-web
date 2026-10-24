@@ -33,7 +33,7 @@ export const siteConfig = {
   instagramHandle: 'homegordenbatam',
   threads: 'https://www.threads.com/@homegordenbatam',
   threadsHandle: 'homegordenbatam',
-  facebook: 'https://www.facebook.com/search/top?q=Gorden%20interior%20batam',
+  facebook: 'https://www.facebook.com/share/1C8WsRYZao/',
   facebookName: 'Gorden interior batam',
   email: 'info@homegordenbatam.com', // TODO: konfirmasi alamat email resmi toko
   address: 'Legenda Villa Hang Lekir, Blok DD2 No 07, Batam Centre, Kota Batam, Kepulauan Riau',

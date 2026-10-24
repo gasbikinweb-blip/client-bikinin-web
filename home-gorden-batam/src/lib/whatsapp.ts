@@ -7,6 +7,10 @@ export function buildWhatsAppLink(message: string): string {
 
 export const generalMessage = `Halo ${siteConfig.name}, saya ingin meminta jadwal survei gratis dan konsultasi pemasangan gorden di Batam.`;
 
+/** Pesan survei untuk halaman area layanan (/area/[slug]) */
+export const areaMessage = (areaName: string) =>
+  `Halo ${siteConfig.name}, saya ingin meminta jadwal survei gratis pemasangan gorden di Kecamatan ${areaName}, Batam.`;
+
 /** Data minimal produk untuk pesan WhatsApp */
 export type ProductInquiry = {
   slug: string;
