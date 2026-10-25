@@ -75,7 +75,8 @@ const localBusinessSchema = {
   logo: new URL('/brand/logo.webp', siteConfig.url).href,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Legenda Villa Hang Lekir, Blok DD2 No 07, Batam Centre',
+    streetAddress: 'Legenda Villa Hang Lekir, Baloi Permai, Batam Kota',
+    postalCode: '29463',
     addressLocality: 'Batam',
     addressRegion: 'Kepulauan Riau',
     addressCountry: 'ID',
