@@ -1,5 +1,3 @@
-import { siteConfig } from '@/lib/config';
-import { buildWhatsAppLink } from '@/lib/whatsapp';
 import { SectionHeading } from './SectionHeading';
 
 const steps = [
@@ -26,8 +24,6 @@ const steps = [
 ];
 
 export function OrderSteps() {
-  const surveyMsg = `Halo ${siteConfig.name}, saya ingin menjadwalkan survei dan pengukuran gratis ke lokasi saya di Batam.`;
-
   return (
     <section
       id="cara-kerja"
@@ -43,9 +39,7 @@ export function OrderSteps() {
             description="Tanpa ribet mengukur sendiri. Semua konsultasi dan jadwal survei gratis dilayani langsung melalui WhatsApp."
           />
           <a
-            href={buildWhatsAppLink(surveyMsg)}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#hitung-survei"
             className="reveal inline-flex shrink-0 items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-background transition-colors hover:bg-accent-strong"
           >
             Jadwalkan Survei Gratis

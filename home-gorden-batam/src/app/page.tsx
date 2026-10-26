@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { AboutSection } from '@/components/AboutSection';
-import { ArrowIcon, PlusIcon } from '@/components/icons';
+import { ArrowIcon, PlusIcon, WhatsAppIcon } from '@/components/icons';
 import { OrderSteps } from '@/components/OrderSteps';
 import { ProductCatalog } from '@/components/ProductCatalog';
 import { ProjectGallery } from '@/components/ProjectGallery';
@@ -80,7 +80,14 @@ export default function HomePage() {
             className="animate-in mt-10 flex flex-col items-center justify-center gap-3.5 sm:flex-row"
             style={{ '--delay': '650ms' } as React.CSSProperties}
           >
-            <WhatsAppButton>Minta Survei Gratis</WhatsAppButton>
+            {/* Gulir halus ke pembuat pesan survei, bukan langsung membuka WhatsApp */}
+            <a
+              href="#hitung-survei"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold tracking-wide text-background transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-strong"
+            >
+              <WhatsAppIcon className="size-5 shrink-0 transition-transform duration-300 group-hover:rotate-12" />
+              <span>Minta Survei Gratis</span>
+            </a>
             <a
               href="#katalog"
               className="group inline-flex min-h-11 items-center gap-2 rounded-full border border-foreground/30 bg-black/40 px-7 py-3 text-sm font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-strong hover:text-accent-strong"
@@ -354,7 +361,8 @@ export default function HomePage() {
           </div>
 
           {/* Pembuat Pesan WhatsApp Otomatis */}
-          <div id="hitung-survei" className="mt-12">
+          {/* scroll-mt: jarak dari navbar sticky saat tombol survei menggulir ke sini */}
+          <div id="hitung-survei" className="mt-12 scroll-mt-24 sm:scroll-mt-28">
             <WhatsAppBuilder />
           </div>
         </div>

@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { projectVideos, type VideoProjectItem } from '@/data/projects';
 import { siteConfig } from '@/lib/config';
-import { buildWhatsAppLink, generalMessage } from '@/lib/whatsapp';
 import { ArrowIcon, WhatsAppIcon } from './icons';
 
 /**
@@ -363,9 +362,7 @@ export function VideoShowcaseCarousel() {
           </div>
 
           <a
-            href={buildWhatsAppLink(generalMessage)}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#hitung-survei"
             className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2.5 rounded-full border-2 border-dashed border-accent/60 bg-accent px-8 py-3.5 text-sm font-semibold whitespace-nowrap text-background shadow-lg shadow-accent/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-strong"
           >
             <WhatsAppIcon className="size-4 shrink-0" />

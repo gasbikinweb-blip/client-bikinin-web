@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { JsonLd } from '@/components/JsonLd';
 import { RevealObserver } from '@/components/RevealObserver';
+import { SmoothAnchorScroll } from '@/components/SmoothAnchorScroll';
 import { siteConfig } from '@/lib/config';
 import './globals.css';
 
@@ -119,6 +120,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Footer />
         <FloatingWhatsApp />
         <RevealObserver />
+        <SmoothAnchorScroll />
       </body>
     </html>
   );
