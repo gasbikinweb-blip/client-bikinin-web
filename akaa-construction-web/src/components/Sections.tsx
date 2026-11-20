@@ -1,5 +1,6 @@
 // Section statis halaman utama (server component)
 import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowIcon, CheckIcon, InstagramIcon, PinIcon, WhatsAppIcon } from './icons';
 import { HeroSlides } from './HeroSlides';
 import { Socials } from './Socials';
@@ -62,12 +63,12 @@ export function Hero() {
           <a href="/kontak#konsultasi" className={`${btnPrimary} rounded-full`}>
             Konsultasi Gratis <ArrowIcon className="size-5" />
           </a>
-          <a
+          <Link
             href="/proyek"
             className="inline-flex min-h-12 items-center rounded-full border border-white/40 px-6 font-bold hover:border-white"
           >
             Lihat Proyek
-          </a>
+          </Link>
         </div>
       </div>
 

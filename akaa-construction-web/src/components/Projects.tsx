@@ -2,6 +2,7 @@
 
 // Portofolio: filter, kartu, dan modal detail proyek (deep link /#proyek-[slug]).
 import Image from 'next/image';
+import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowIcon, CloseIcon, LinkIcon, WhatsAppIcon } from './icons';
 import { projects, projectSlugs, statusLabel, workTypeLabel } from '@/data/projects';
@@ -483,6 +484,12 @@ function Detail({ project: p, onClose }: { project: Project; onClose: () => void
               <WhatsAppIcon className="size-5" /> Konsultasikan Proyek Serupa
               <span className="sr-only"> (tab baru)</span>
             </a>
+            <Link
+              href={`/proyek/${p.slug}`}
+              className="inline-flex min-h-12 items-center gap-2 rounded-md border border-line px-4 font-semibold hover:border-foreground"
+            >
+              Halaman proyek <ArrowIcon className="size-4" />
+            </Link>
             <button
               type="button"
               onClick={copy}

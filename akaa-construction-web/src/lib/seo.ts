@@ -31,14 +31,21 @@ export function pageMetadata({ title, description, path, image }: PageSeo): Meta
   };
 }
 
-/** Data terstruktur BreadcrumbList: Beranda › halaman */
-export function breadcrumb(name: string, path: string) {
+export type Crumb = { name: string; path: string };
+
+/** Data terstruktur BreadcrumbList: Beranda › ... › halaman */
+export function breadcrumbList(crumbs: readonly Crumb[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Beranda', item: siteConfig.url },
-      { '@type': 'ListItem', position: 2, name, item: new URL(path, siteConfig.url).href },
-    ],
+    itemListElement: [{ name: 'Beranda', path: '/' }, ...crumbs].map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: c.name,
+      item: new URL(c.path, siteConfig.url).href,
+    })),
   };
 }
+
+/** Breadcrumb satu tingkat: Beranda › halaman */
+export const breadcrumb = (name: string, path: string) => breadcrumbList([{ name, path }]);
