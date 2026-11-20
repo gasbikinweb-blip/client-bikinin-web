@@ -23,7 +23,7 @@ export const siteConfig = {
   description:
     'Jasa bangun rumah, renovasi, dan custom interior di Jabodetabek. Kantor di Cibubur. Free konsultasi, free survei lokasi, dan RAB transparan.',
   // TODO: ganti dengan domain asli
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://porto-akaa-construction.vercel.app',
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://akaaconstruction.web.id',
   waNumber,
   waDisplay: '0858-8297-1295',
 } as const;
