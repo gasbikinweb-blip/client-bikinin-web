@@ -6,7 +6,7 @@ import { Socials } from './Socials';
 import { advantages } from '@/data/advantages';
 import { faqs } from '@/data/faq';
 import { processSteps } from '@/data/process';
-import { projects } from '@/data/projects';
+import { imageAlt, projects } from '@/data/projects';
 import { activePromos } from '@/data/promos';
 import { services } from '@/data/services';
 import { site } from '@/data/site';
@@ -86,7 +86,13 @@ export function Hero() {
         style={{ '--delay': '520ms' } as React.CSSProperties}
       >
         <span className="relative size-20 shrink-0 overflow-hidden rounded-xl">
-          <Image src={sn.cover.thumb} alt="" fill sizes="80px" className="object-cover" />
+          <Image
+            src={sn.cover.thumb}
+            alt={sn.cover.alt}
+            fill
+            sizes="80px"
+            className="object-cover"
+          />
         </span>
         <span className="min-w-0 flex-1">
           <span className="text-[11px] font-bold tracking-widest text-accent uppercase">
@@ -177,7 +183,7 @@ export function Services() {
                 <>
                   <Image
                     src={look.img}
-                    alt=""
+                    alt={imageAlt(look.img, `Contoh proyek ${s.name} AKAA Construction`)}
                     fill
                     sizes="(min-width: 1024px) 50vw, (min-width: 640px) 50vw, 100vw"
                     className="-z-10 object-cover transition duration-700 group-hover:scale-105"
@@ -192,7 +198,7 @@ export function Services() {
                 <div className="absolute right-0 bottom-0 -z-10 h-[46%] w-[72%] overflow-hidden rounded-tl-[28px]">
                   <Image
                     src={look.img}
-                    alt=""
+                    alt={imageAlt(look.img, `Contoh proyek ${s.name} AKAA Construction`)}
                     fill
                     sizes="(min-width: 1024px) 25vw, 70vw"
                     className="object-cover transition duration-700 group-hover:scale-105"
@@ -372,7 +378,7 @@ export function Process() {
       <div className="relative h-72 lg:hidden">
         <Image
           src="/images/proyek/renovasi-rumah-office/01.webp"
-          alt=""
+          alt="Tukang AKAA mengerjakan dinding lantai atas proyek renovasi rumah"
           fill
           sizes="(min-width: 1024px) 40vw, 100vw"
           className="object-cover"

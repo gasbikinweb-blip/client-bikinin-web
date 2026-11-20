@@ -4,6 +4,7 @@
 // Bila pengguna memilih "kurangi animasi", hanya foto pertama yang tampil.
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { imageAlt } from '@/data/projects';
 
 const slides = [
   '/images/proyek/gazebo-interior-cafe-jakarta/01.webp',
@@ -23,12 +24,13 @@ export function HeroSlides() {
   }, []);
 
   return (
-    <div aria-hidden="true" className="absolute inset-0 -z-20">
+    <div className="absolute inset-0 -z-20">
       {slides.map((src, idx) => (
         <Image
           key={src}
           src={src}
-          alt=""
+          alt={imageAlt(src, 'Proyek bangun rumah dan interior AKAA Construction')}
+          aria-hidden={idx !== i}
           fill
           priority={idx === 0}
           sizes="100vw"

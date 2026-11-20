@@ -27,7 +27,11 @@ export default function Home() {
           },
           email: site.email,
           openingHours: 'Mo-Sa 08:00-17:00',
-          areaServed: ['Jakarta', 'Bogor', 'Depok', 'Tangerang', 'Bekasi'],
+          areaServed: [...site.areaDetail, 'Tangerang'].map((name) => ({ '@type': 'City', name })),
+          // Titik kantor (dari embed Google Maps di site.ts)
+          geo: { '@type': 'GeoCoordinates', latitude: -6.3656, longitude: 106.9575 },
+          hasMap: site.mapsUrl,
+          logo: new URL('/brand/logo.png', siteConfig.url).href,
           sameAs: Object.values(site.social),
         }}
       />

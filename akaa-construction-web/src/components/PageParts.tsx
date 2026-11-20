@@ -14,13 +14,20 @@ export function PageHeader({
   eyebrow: string;
   title: string;
   text?: string;
-  image?: string;
+  image?: { src: string; alt: string };
 }) {
   return (
     <section className="relative isolate overflow-hidden bg-night text-white">
       {image && (
         <>
-          <Image src={image} alt="" fill priority sizes="100vw" className="-z-20 object-cover" />
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            priority
+            sizes="100vw"
+            className="-z-20 object-cover"
+          />
           <div className="absolute inset-0 -z-10 bg-gradient-to-r from-night/90 via-night/70 to-night/40" />
         </>
       )}

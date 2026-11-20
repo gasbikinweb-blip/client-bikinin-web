@@ -1,26 +1,31 @@
 import type { Metadata } from 'next';
+import { JsonLd } from '@/components/JsonLd';
+import { breadcrumb, pageMetadata } from '@/lib/seo';
 import { CtaBand, PageHeader } from '@/components/PageParts';
 import { Posters } from '@/components/Posters';
 import { Advantages, Process } from '@/components/Sections';
 import { projects } from '@/data/projects';
 import { site } from '@/data/site';
 
-export const metadata: Metadata = {
+const cover = (slug: string) => projects.find((p) => p.slug === slug)?.cover;
+const headerImage = cover('sn-house-rancamaya');
+
+export const metadata: Metadata = pageMetadata({
   title: 'Tentang AKAA Construction | Kontraktor Rumah Cibubur',
   description: `Profil AKAA Construction (${site.legalName}), jasa bangun rumah, renovasi, dan interior di ${site.area}.`,
-  alternates: { canonical: '/tentang' },
-};
-
-const cover = (slug: string) => projects.find((p) => p.slug === slug)?.cover.src;
+  path: '/tentang',
+  image: headerImage,
+});
 
 export default function TentangPage() {
   return (
     <>
+      <JsonLd data={breadcrumb('Tentang', '/tentang')} />
       <PageHeader
         eyebrow="Tentang kami"
         title="AKAA Construction & Interior"
         text={`${site.tagline}.`}
-        image={cover('sn-house-rancamaya')}
+        image={headerImage}
       />
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-2">
         <div className="reveal">

@@ -576,3 +576,13 @@ export const statusLabel: Record<Project['status'], string> = {
 };
 
 export const projectSlugs = new Set(projects.map((p) => p.slug));
+
+// Alt foto berdasarkan path (dari data proyek), untuk gambar dekoratif yang ikut terindeks Google
+const altBySrc = new Map(
+  projects.flatMap((p) =>
+    [p.cover, ...(p.images ?? []), ...(p.progress ?? []).flatMap((u) => u.images ?? [])].map(
+      (i) => [i.src, i.alt] as const,
+    ),
+  ),
+);
+export const imageAlt = (src: string, fallback: string) => altBySrc.get(src) ?? fallback;
