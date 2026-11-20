@@ -1,0 +1,13 @@
+import type { MetadataRoute } from 'next';
+import { siteConfig } from '@/lib/config';
+
+// Wajib statis agar bisa diekspor menjadi out/sitemap.xml
+export const dynamic = 'force-static';
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return ['/', '/tentang', '/layanan', '/proyek', '/kontak'].map((path) => ({
+    url: new URL(path, siteConfig.url).href,
+    changeFrequency: 'weekly',
+    priority: path === '/' ? 1 : 0.8,
+  }));
+}

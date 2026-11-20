@@ -1,0 +1,217 @@
+@import 'tailwindcss';
+
+/* Mode gelap mengikuti atribut data-theme di <html> (dipasang public/theme-init.js) */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/*
+ * Palet AKAA: putih/abu terang, charcoal (warna logo), kuning konstruksi sebagai aksen hemat.
+ * Teks di atas kuning selalu charcoal (kontras > 10:1).
+ */
+:root {
+  color-scheme: light;
+  --background: #f6f5f2;
+  --surface: #ffffff;
+  --surface-2: #ecebe6;
+  --foreground: #1b1c1e;
+  --muted: #55585e;
+  --line: rgb(27 28 30 / 0.13);
+  --accent: #f2b705;
+  --accent-ink: #1b1c1e;
+  /* Kuning untuk teks/garis di atas latar terang (kontras ≥ 4.5:1) */
+  --accent-text: #8a5a00;
+  --night: #17181a;
+  --night-2: #222428;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --background: #121315;
+  --surface: #1b1d20;
+  --surface-2: #25282c;
+  --foreground: #f1f0ec;
+  --muted: #a9adb3;
+  --line: rgb(241 240 236 / 0.12);
+  --accent-text: #f5c534;
+  --night: #0b0c0d;
+  --night-2: #17191b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-text: var(--accent-text);
+  --color-night: var(--night);
+  --color-night-2: var(--night-2);
+  --color-wa: #1f7a45;
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Garis blueprint tipis untuk latar section */
+.blueprint {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Judul section: label kecil bergaris kuning */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.eyebrow::before {
+  content: '';
+  width: 2rem;
+  height: 3px;
+  background: var(--accent);
+}
+
+/* ---------- Animasi ---------- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ken-burns {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes wa-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(31 122 69 / 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgb(31 122 69 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(31 122 69 / 0);
+  }
+}
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+.animate-in {
+  animation: fade-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+.animate-ken-burns {
+  animation: ken-burns 14s ease-out both;
+}
+.wa-pulse {
+  animation: wa-pulse 2.4s infinite;
+}
+
+/* Muncul saat di-scroll (dipicu RevealObserver) */
+.reveal-ready .reveal:not(.is-visible) {
+  opacity: 0;
+}
+.reveal.is-visible {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms) backwards;
+}
+
+/* Modal proyek: penuh layar di HP, kartu di layar lebar */
+dialog.project-modal {
+  width: 100%;
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--surface);
+  color: var(--foreground);
+}
+dialog.project-modal[open] {
+  animation: sheet-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+dialog.project-modal::backdrop {
+  background: rgb(10 10 12 / 0.7);
+}
+@media (min-width: 768px) {
+  dialog.project-modal {
+    margin: auto;
+    width: min(72rem, calc(100% - 3rem));
+    height: auto;
+    max-height: 90dvh;
+    border-radius: 0.5rem;
+  }
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Bingkai foto hero: sudut kiri atas dipotong diagonal, sudut lain membulat */
+.hero-shape {
+  border-radius: 28px;
+  clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%, 0 26%);
+}
+
+/* Logo sebagai mask: warna diatur lewat background-color */
+.logo-mask {
+  mask: url('/brand/logo.png') center / contain no-repeat;
+}

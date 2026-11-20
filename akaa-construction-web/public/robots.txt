@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Ganti domain sesuai NEXT_PUBLIC_SITE_URL
+Sitemap: https://porto-akaa-construction.vercel.app/sitemap.xml
