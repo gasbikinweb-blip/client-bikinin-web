@@ -42,8 +42,8 @@ export function MobileNav() {
             return (
               <li key={l.href}>
                 <a
-                  href={`/${l.href}`}
-                  aria-current={isActive ? 'location' : undefined}
+                  href={l.href}
+                  aria-current={isActive ? 'page' : undefined}
                   onClick={() => setOpen(false)}
                   className={`flex items-center justify-between border-b border-line py-3.5 font-serif text-2xl transition-colors last:border-0 hover:text-accent ${
                     isActive ? 'font-semibold text-accent-strong' : 'text-foreground'

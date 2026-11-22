@@ -120,14 +120,22 @@ export default function HomePage() {
           <div className="mt-12">
             <ProductCatalog products={allProducts} categories={categories} />
           </div>
-          <p className="mt-10 text-center">
-            <Link
-              href="/produk"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:text-accent-strong"
-            >
-              Buka halaman katalog lengkap <ArrowIcon className="size-4" />
-            </Link>
-          </p>
+          {/* Halaman katalog per kategori (Paket Pro) */}
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            {[
+              { href: '/katalog-gorden', label: 'Katalog Gorden & Vitrase' },
+              { href: '/blinds-wallpaper', label: 'Blinds & Wallpaper' },
+              { href: '/produk', label: 'Semua produk' },
+            ].map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-line px-5 text-sm font-semibold transition-colors hover:border-accent hover:text-accent-strong"
+              >
+                {l.label} <ArrowIcon className="size-4" />
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -165,6 +173,14 @@ export default function HomePage() {
           <div className="mt-14">
             <ProjectGallery />
           </div>
+          <p className="mt-10 text-center">
+            <Link
+              href="/galeri"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-line px-5 text-sm font-semibold transition-colors hover:border-accent hover:text-accent-strong"
+            >
+              Buka halaman Galeri Pemasangan <ArrowIcon className="size-4" />
+            </Link>
+          </p>
         </div>
       </section>
 

@@ -17,6 +17,8 @@ export interface ProjectItem {
   width: number;
   height: number;
   featured?: boolean;
+  /** Tanggal foto masuk (YYYY-MM-DD); foto dengan tanggal ini ditandai "Terbaru" */
+  addedAt?: string;
 }
 
 export interface VideoProjectItem {
@@ -98,6 +100,111 @@ export const projectVideos: readonly VideoProjectItem[] = [
 
 // Daftar foto portofolio terkurasi dari folder assets/ dengan penamaan gorden yang akurat sesuai visual foto
 export const projects: readonly ProjectItem[] = [
+  // Foto pemasangan terbaru 22 November 2026 (dari pemilik usaha; tanpa wajah/alamat)
+  {
+    id: 'terbaru-2611-01',
+    ...projectPaths('vitrase-putih-gorden-mustard-plafon-tinggi-2611-01'),
+    alt: 'Vitrase putih panjang dengan gorden mustard di ruang berplafon tinggi dan pintu kaca',
+    productType: 'Vitrase Putih & Gorden Mustard',
+    filterCategory: 'Vitrase',
+    roomType: 'Ruang Plafon Tinggi',
+    kind: 'proyek',
+    width: 1024,
+    height: 1280,
+    featured: true,
+    addedAt: '2026-11-22',
+  },
+  {
+    id: 'terbaru-2611-02',
+    ...projectPaths('roller-blinds-abu-jendela-2611-01'),
+    alt: 'Roller blinds abu-abu terpasang rapi di atas jendela ruangan',
+    productType: 'Roller Blinds Abu-abu',
+    filterCategory: 'Blinds',
+    roomType: 'Jendela Ruangan',
+    kind: 'proyek',
+    width: 1024,
+    height: 1280,
+    featured: true,
+    addedAt: '2026-11-22',
+  },
+  {
+    id: 'terbaru-2611-03',
+    ...projectPaths('gorden-krem-ring-sudut-ruangan-2611-01'),
+    alt: 'Gorden krem model ring (eyelet) mengikuti sudut ruangan dengan tali pengikat',
+    productType: 'Gorden Krem Model Ring',
+    filterCategory: 'Gorden',
+    roomType: 'Sudut Ruangan',
+    kind: 'proyek',
+    width: 1024,
+    height: 1280,
+    featured: true,
+    addedAt: '2026-11-22',
+  },
+  {
+    id: 'terbaru-2611-04',
+    ...projectPaths('gorden-krem-ruang-tamu-plafon-kayu-2611-01'),
+    alt: 'Gorden krem model ring di ruang tamu berplafon kayu dengan lampu LED',
+    productType: 'Gorden Krem Ruang Tamu',
+    filterCategory: 'Gorden',
+    roomType: 'Ruang Tamu',
+    kind: 'proyek',
+    width: 1024,
+    height: 1280,
+    featured: true,
+    addedAt: '2026-11-22',
+  },
+  {
+    id: 'terbaru-2611-05',
+    ...projectPaths('gorden-krem-detail-ring-plafon-kayu-2611-01'),
+    alt: 'Detail lipatan gorden krem dan rel besi hitam di bawah plafon kayu',
+    productType: 'Detail Gorden Krem & Rel Besi',
+    filterCategory: 'Gorden',
+    roomType: 'Detail Pemasangan',
+    kind: 'proyek',
+    width: 1024,
+    height: 1280,
+    featured: true,
+    addedAt: '2026-11-22',
+  },
+  {
+    id: 'terbaru-2611-06',
+    ...projectPaths('gorden-cokelat-vitrase-pintu-kaca-2611-01'),
+    alt: 'Gorden cokelat dengan vitrase putih di pintu kaca ruang tamu',
+    productType: 'Gorden Cokelat & Vitrase',
+    filterCategory: 'Gorden',
+    roomType: 'Ruang Tamu',
+    kind: 'proyek',
+    width: 1024,
+    height: 1280,
+    featured: true,
+    addedAt: '2026-11-22',
+  },
+  {
+    id: 'terbaru-2611-07',
+    ...projectPaths('gorden-cokelat-tua-vitrase-ruang-tv-2611-01'),
+    alt: 'Gorden cokelat tua dengan vitrase putih di jendela ruang TV',
+    productType: 'Gorden Cokelat Tua & Vitrase',
+    filterCategory: 'Gorden',
+    roomType: 'Ruang TV',
+    kind: 'proyek',
+    width: 1024,
+    height: 1280,
+    featured: true,
+    addedAt: '2026-11-22',
+  },
+  {
+    id: 'terbaru-2611-08',
+    ...projectPaths('gorden-krem-pintu-ruang-tamu-2611-01'),
+    alt: 'Gorden krem model ring menutup pintu dan jendela ruang tamu',
+    productType: 'Gorden Krem Model Ring',
+    filterCategory: 'Gorden',
+    roomType: 'Ruang Tamu',
+    kind: 'proyek',
+    width: 1024,
+    height: 1280,
+    featured: true,
+    addedAt: '2026-11-22',
+  },
   {
     id: 'proyek-01',
     ...projectPaths('gorden-minimalis-krem-ruang-tamu-modern-01'),
@@ -764,3 +871,10 @@ export const projects: readonly ProjectItem[] = [
 export function getFeaturedProjects(): readonly ProjectItem[] {
   return projects.filter((p) => p.featured);
 }
+
+/** Foto yang masuk di tanggal terbaru (ditandai "Terbaru" di galeri & beranda) */
+export const latestDate = projects.reduce(
+  (max, p) => (p.addedAt && p.addedAt > max ? p.addedAt : max),
+  '',
+);
+export const latestProjects = projects.filter((p) => latestDate && p.addedAt === latestDate);

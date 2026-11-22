@@ -18,7 +18,7 @@
     "optimize-videos": "node scripts/optimize-videos.mjs"
   },
   "dependencies": {
-    "next": "16.4.0",
+    "next": "16.4.6",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
@@ -28,7 +28,7 @@
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "eslint": "9.39.5",
-    "eslint-config-next": "16.4.0",
+    "eslint-config-next": "16.4.6",
     "prettier": "3.9.9",
     "serve": "14.2.6",
     "sharp": "0.35.5",

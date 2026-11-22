@@ -9,7 +9,7 @@ Website ini dirancang sebagai **100% static site (`output: 'export'`)** mengguna
 ## 1. Spesifikasi Lingkungan & Teknologi
 
 - **Node.js**: `>=20.9.0` (dikunci pada `.nvmrc` di `22.20.0`)
-- **Framework**: Next.js `16.4.0` (App Router, Static Export ke `/out`)
+- **Framework**: Next.js `16.4.6` (App Router, Static Export ke `/out`)
 - **UI & Bahasa**: React `19.3.0`, TypeScript `5.9.3` (`strict: true`, `noUncheckedIndexedAccess: true`)
 - **Styling**: Tailwind CSS `4.3.3` dengan dukungan **Mode Gelap (Default) & Mode Terang** yang memenuhi standar kontras WCAG AA ($\ge 4.5:1$)
 - **Optimasi Media**:

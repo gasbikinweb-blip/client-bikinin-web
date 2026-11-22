@@ -2,7 +2,12 @@
 
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { type ProjectFilterCategory, type ProjectItem, projects } from '@/data/projects';
+import {
+  latestDate,
+  type ProjectFilterCategory,
+  type ProjectItem,
+  projects,
+} from '@/data/projects';
 import { siteConfig } from '@/lib/config';
 import { buildWhatsAppLink } from '@/lib/whatsapp';
 import { WhatsAppIcon } from './icons';
@@ -212,6 +217,11 @@ export function ProjectGallery() {
 
                   {/* 2 Frosted Glass Pills di Kiri Atas (Truncate rapi supaya tidak pecah di zoom 120%) */}
                   <div className="absolute top-3 left-3 right-3 flex items-center gap-1.5 overflow-hidden">
+                    {item.addedAt === latestDate && (
+                      <span className="shrink-0 rounded-full bg-white px-2.5 py-1 text-[10px] font-bold tracking-wider text-[#5c4011] uppercase shadow-sm">
+                        Terbaru
+                      </span>
+                    )}
                     <span className="shrink-0 rounded-full border border-white/30 bg-black/50 px-2.5 py-1 text-[10px] font-semibold tracking-wider text-white uppercase backdrop-blur-md">
                       {item.filterCategory}
                     </span>

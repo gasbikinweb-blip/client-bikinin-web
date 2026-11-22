@@ -5,55 +5,34 @@ import { useEffect, useState } from 'react';
 import { type NavHref, navLinks } from './nav-links';
 
 /**
- * Scroll-spy ringan untuk halaman single-page:
- * Melacak section mana yang sedang berada di area baca layar (viewport),
- * lalu mengembalikan href aktif (misalnya '#katalog' atau '#portofolio').
+ * Menu aktif untuk navigasi multi halaman:
+ * - Halaman /katalog-gorden, /galeri, dst. → menu halaman itu aktif.
+ * - Di beranda: "Beranda" aktif, berganti ke "Kontak" saat section #kontak sudah terlihat.
  */
 export function useActiveSection(): NavHref | null {
-  const [activeHref, setActiveHref] = useState<NavHref>('#beranda');
-  // Di halaman selain beranda (mis. /produk, /faq) tidak ada section yang aktif
-  const isHome = usePathname() === '/';
+  const pathname = usePathname().replace(/\/$/, '') || '/';
+  const isHome = pathname === '/';
+  const [atContact, setAtContact] = useState(false);
 
   useEffect(() => {
     if (!isHome) return;
-    const sectionIds = navLinks.map((link) => link.href.slice(1));
-
-    const updateActiveSection = () => {
-      // Titik deteksi sedikit di bawah tinggi navbar sticky (~30% dari atas layar)
-      const triggerLine = window.innerHeight * 0.3;
-
-      // Jika sudah scroll sampai mentok paling bawah halaman, aktifkan section terakhir (#kontak)
+    const update = () => {
+      const el = document.getElementById('kontak');
       const isAtBottom =
         window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
-      if (isAtBottom) {
-        setActiveHref('#kontak');
-        return;
-      }
-
-      let current: NavHref = '#beranda';
-
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        const rect = el.getBoundingClientRect();
-        // Jika batas atas section sudah melewati garis trigger, jadikan kandidat aktif
-        if (rect.top <= triggerLine) {
-          current = `#${id}` as NavHref;
-        }
-      }
-
-      setActiveHref(current);
+      setAtContact(
+        isAtBottom || (!!el && el.getBoundingClientRect().top <= window.innerHeight * 0.3),
+      );
     };
-
-    updateActiveSection();
-    window.addEventListener('scroll', updateActiveSection, { passive: true });
-    window.addEventListener('resize', updateActiveSection, { passive: true });
-
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
     return () => {
-      window.removeEventListener('scroll', updateActiveSection);
-      window.removeEventListener('resize', updateActiveSection);
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
     };
   }, [isHome]);
 
-  return isHome ? activeHref : null;
+  if (isHome) return atContact ? '/#kontak' : '/';
+  return navLinks.find((l) => l.href === pathname)?.href ?? null;
 }
