@@ -1,6 +1,7 @@
 // Data katalog 9 jenis produk & layanan utama Home Gorden Batam.
 // Semua deskripsi teknis, spesifikasi bahan, dan rekomendasi ruangan bersifat contoh umum.
 // TODO: verifikasi detail bahan dan koleksi warna aktual dengan pemilik usaha.
+import { projects } from './projects';
 
 export type CategorySlug = 'gorden-vitrase' | 'blinds' | 'wallpaper-aksesoris';
 
@@ -66,6 +67,18 @@ function gallery(slug: string, alts: readonly [string, ...string[]]) {
   return [first!, ...rest] as const;
 }
 
+// Foto pemasangan asli (dari data proyek) ditambahkan di belakang foto katalog; sampul tetap foto pertama
+function withInstalls(
+  images: readonly [ProductImage, ...ProductImage[]],
+  projectIds: readonly string[],
+): readonly [ProductImage, ...ProductImage[]] {
+  const extra = projectIds.flatMap((id) => {
+    const p = projects.find((x) => x.id === id);
+    return p ? [{ src: p.src, alt: p.alt }] : [];
+  });
+  return [...images, ...extra];
+}
+
 // Katalog 9 jenis produk & layanan utama Home Gorden Batam.
 const products: readonly Product[] = [
   {
@@ -122,14 +135,18 @@ const products: readonly Product[] = [
       'Menjaga privasi penghuni rumah dari pandangan luar di siang hari',
       'Tersedia model jatuh lurus minimalis maupun model ikat kupu-kupu',
     ],
-    images: gallery('gorden-vitrase', [
-      'Gorden vitrase putih polos model smokring yang rapi di ruang keluarga',
-      'Gorden vitrase putih model kupu-kupu dengan pita emas pada tiga jendela tinggi',
-      'Perpaduan vitrase putih bersih di balik gorden smokring warna taupe',
-      'Gorden vitrase putih motif bordir berpadu gorden smokring silver abu-abu pada jendela kamar',
-      'Vitrase putih plisket di balik gorden smokring warna emas pada jendela tinggi samping pintu',
-      'Perpaduan vitrase putih bersih dan gorden smokring krem muda pada ruangan berlantai kayu',
-    ]),
+    images: withInstalls(
+      // Foto pemasangan terbaru 22 Nov 2026
+      gallery('gorden-vitrase', [
+        'Gorden vitrase putih polos model smokring yang rapi di ruang keluarga',
+        'Gorden vitrase putih model kupu-kupu dengan pita emas pada tiga jendela tinggi',
+        'Perpaduan vitrase putih bersih di balik gorden smokring warna taupe',
+        'Gorden vitrase putih motif bordir berpadu gorden smokring silver abu-abu pada jendela kamar',
+        'Vitrase putih plisket di balik gorden smokring warna emas pada jendela tinggi samping pintu',
+        'Perpaduan vitrase putih bersih dan gorden smokring krem muda pada ruangan berlantai kayu',
+      ]),
+      ['terbaru-2611-01', 'terbaru-2611-06', 'terbaru-2611-07'],
+    ),
     specs: {
       material: 'Voile putih halus, sheer bertekstur lembut, atau vitrase motif elegan',
       dimensions: 'Custom mengikuti lebar dan tinggi jendela/pintu',
@@ -152,25 +169,29 @@ const products: readonly Product[] = [
       'Gelombang smokring teratur dan mudah dibuka-tutup setiap hari',
       'Perawatan lebih praktis dan tidak mudah menyimpan debu',
     ],
-    images: gallery('gorden-minimalis', [
-      'Gorden minimalis krem terang dengan vitrase putih dan sofa senada di ruang tamu modern',
-      'Gorden minimalis abu-abu muda dengan vitrase putih pada pintu kaca besar',
-      'Gorden minimalis cokelat keemasan model smokring pada pintu kaca berbingkai hitam',
-      'Dua pasang gorden minimalis warna emas smokring yang serasi pada pintu kayu',
-      'Gorden smokring minimalis warna emas gold tertutup rapi dengan lipatan gelombang simetris',
-      'Gorden smokring warna cokelat terracotta berpadu vitrase putih dan tassel krem',
-      'Gorden smokring cokelat muda dengan vitrase putih di ruang tamu keluarga',
-      'Gorden minimalis plisket cokelat muda menjuntai tinggi dari plafon dengan vitrase putih',
-      'Gorden smokring minimalis warna merah maroon berpadu vitrase putih dan sabuk emas',
-      'Gorden smokring minimalis warna krem hangat tertutup rapi di ruang keluarga',
-      'Gorden smokring cokelat kopi berpadu vitrase putih di sebelah sofa ruang tamu',
-      'Gorden smokring minimalis warna biru muda keabuan sebagai penyekat ruangan yang rapi',
-      'Gorden smokring minimalis abu-abu dengan vitrase putih dan dekorasi dinding daun emas',
-      'Set gorden smokring abu-abu dengan poni atas pintu utama dan vitrase putih di ruang makan',
-      'Gorden minimalis smokring warna mocca krem dengan vitrase pada jendela kaca lebar',
-      'Gorden smokring minimalis warna cokelat susu dengan vitrase bermotif di ruang tamu',
-      'Inspirasi gorden smokring minimalis warna kuning keemasan (mustard gold) dengan vitrase putih',
-    ]),
+    images: withInstalls(
+      // Foto pemasangan terbaru 22 Nov 2026
+      gallery('gorden-minimalis', [
+        'Gorden minimalis krem terang dengan vitrase putih dan sofa senada di ruang tamu modern',
+        'Gorden minimalis abu-abu muda dengan vitrase putih pada pintu kaca besar',
+        'Gorden minimalis cokelat keemasan model smokring pada pintu kaca berbingkai hitam',
+        'Dua pasang gorden minimalis warna emas smokring yang serasi pada pintu kayu',
+        'Gorden smokring minimalis warna emas gold tertutup rapi dengan lipatan gelombang simetris',
+        'Gorden smokring warna cokelat terracotta berpadu vitrase putih dan tassel krem',
+        'Gorden smokring cokelat muda dengan vitrase putih di ruang tamu keluarga',
+        'Gorden minimalis plisket cokelat muda menjuntai tinggi dari plafon dengan vitrase putih',
+        'Gorden smokring minimalis warna merah maroon berpadu vitrase putih dan sabuk emas',
+        'Gorden smokring minimalis warna krem hangat tertutup rapi di ruang keluarga',
+        'Gorden smokring cokelat kopi berpadu vitrase putih di sebelah sofa ruang tamu',
+        'Gorden smokring minimalis warna biru muda keabuan sebagai penyekat ruangan yang rapi',
+        'Gorden smokring minimalis abu-abu dengan vitrase putih dan dekorasi dinding daun emas',
+        'Set gorden smokring abu-abu dengan poni atas pintu utama dan vitrase putih di ruang makan',
+        'Gorden minimalis smokring warna mocca krem dengan vitrase pada jendela kaca lebar',
+        'Gorden smokring minimalis warna cokelat susu dengan vitrase bermotif di ruang tamu',
+        'Inspirasi gorden smokring minimalis warna kuning keemasan (mustard gold) dengan vitrase putih',
+      ]),
+      ['terbaru-2611-03', 'terbaru-2611-04', 'terbaru-2611-08'],
+    ),
     specs: {
       material: 'Kain semi-blackout dan blackout polos bertekstur halus',
       dimensions: 'Custom sesuai ukuran jendela satu daun, dua daun, atau pintu geser',
@@ -299,10 +320,14 @@ const products: readonly Product[] = [
       'Tersedia bahan solar screen (menahan silau tapi tetap bisa melihat ke luar) maupun blackout',
       'Mekanisme gulung halus dan mudah dioperasikan',
     ],
-    images: gallery('roller-blinds', [
-      'Roller blinds warna cokelat hangat dua lajur dengan rantai tarikan samping yang rapi',
-      'Pemasangan roller blinds warna abu-abu pada deretan jendela ruang kerja kantor modern',
-    ]),
+    images: withInstalls(
+      // Foto pemasangan terbaru 22 Nov 2026
+      gallery('roller-blinds', [
+        'Roller blinds warna cokelat hangat dua lajur dengan rantai tarikan samping yang rapi',
+        'Pemasangan roller blinds warna abu-abu pada deretan jendela ruang kerja kantor modern',
+      ]),
+      ['terbaru-2611-02'],
+    ),
     specs: {
       material: 'Pilihan kain blackout, dimout, atau solar screen penahan sinar UV',
       dimensions: 'Custom per bidang kaca jendela',
@@ -360,10 +385,14 @@ const products: readonly Product[] = [
       'Banyak pilihan model tutup ujung (endcup) dan warna (emas, hitam, perunggu, silver, cokelat)',
       'Bisa dipesan sekaligus saat pasang gorden baru maupun untuk perbaikan rell lama',
     ],
-    images: gallery('rell-besi', [
-      'Koleksi batang rell besi gorden berbagai motif ulir dan warna emas, perak, hitam, serta cokelat',
-      'Katalog pilihan tutup ujung rell gorden (endcup) minimalis dalam warna bronze, hitam, putih, dan coffee',
-    ]),
+    images: withInstalls(
+      // Foto pemasangan terbaru 22 Nov 2026
+      gallery('rell-besi', [
+        'Koleksi batang rell besi gorden berbagai motif ulir dan warna emas, perak, hitam, serta cokelat',
+        'Katalog pilihan tutup ujung rell gorden (endcup) minimalis dalam warna bronze, hitam, putih, dan coffee',
+      ]),
+      ['terbaru-2611-05'],
+    ),
     specs: {
       material: 'Besi berlapis coating anti-karat & aluminium tebal berkualitas',
       dimensions: 'Dipotong sesuai lebar jendela (tersedia single track & double track)',
