@@ -1,21 +1,19 @@
 'use client';
 
 // Section interaktif ala "pilih karakter": pilih ruangan, lalu pilih jenis gordennya.
-// Klik "Lihat Detail" langsung membuka modal detail produk tanpa pindah halaman.
+// Klik "Lihat Detail" menuju halaman detail produk (/produk/[slug]).
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
-import { getProductBySlug, type Product } from '@/data/products';
 import type { Room } from '@/data/rooms';
 import { buildWhatsAppLink, productMessage } from '@/lib/whatsapp';
 import { ArrowIcon, WhatsAppIcon } from './icons';
-import { ProductDetailModal } from './ProductDetailModal';
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
 export function RoomSelector({ rooms }: { rooms: Room[] }) {
   const [roomIndex, setRoomIndex] = useState(0);
   const [itemIndex, setItemIndex] = useState(0);
-  const [modalProduct, setModalProduct] = useState<Product | null>(null);
 
   const room = rooms[roomIndex] ?? rooms[0];
   if (!room) return null;
@@ -228,23 +226,17 @@ export function RoomSelector({ rooms }: { rooms: Room[] }) {
                 <span>Tanya via WhatsApp</span>
                 <span className="sr-only"> (membuka WhatsApp di tab baru)</span>
               </a>
-              <button
-                type="button"
-                onClick={() => {
-                  const found = getProductBySlug(item.slug);
-                  if (found) setModalProduct(found);
-                }}
-                className="group inline-flex min-h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-full border border-foreground/30 px-6 py-3 text-sm font-semibold whitespace-nowrap transition hover:border-accent hover:text-accent-strong"
+              <Link
+                href={`/produk/${item.slug}`}
+                className="group inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-full border border-foreground/30 px-6 py-3 text-sm font-semibold whitespace-nowrap transition hover:border-accent hover:text-accent-strong"
               >
                 <span>Lihat Detail</span>
                 <ArrowIcon className="size-4 shrink-0 transition-transform group-hover:translate-x-1" />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-
-      <ProductDetailModal product={modalProduct} onClose={() => setModalProduct(null)} />
     </div>
   );
 }

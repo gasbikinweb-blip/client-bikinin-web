@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { getCategory, type Product } from '@/data/products';
 import { buildWhatsAppLink, productMessage } from '@/lib/whatsapp';
 import { ArrowIcon, WhatsAppIcon } from './icons';
@@ -6,23 +7,22 @@ import { ArrowIcon, WhatsAppIcon } from './icons';
 type Props = {
   product: Product;
   sizes?: string;
-  onSelect?: (product: Product) => void;
 };
 
 export function ProductCard({
   product,
   sizes = '(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw',
-  onSelect,
 }: Props) {
   const cover = product.images[0];
+  // Detail produk sekarang halaman sendiri (Paket Pro), bukan modal
+  const href = `/produk/${product.slug}`;
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-surface p-3 shadow-sm transition-all duration-300 hover:border-accent/50 hover:shadow-xl">
       {/* Rasio 4:5 tetap supaya semua kartu sejajar rata di semua ukuran layar & zoom 120% */}
-      <button
-        type="button"
-        onClick={() => onSelect?.(product)}
+      <Link
+        href={href}
         aria-label={`Lihat detail ${product.name}`}
-        className="relative block aspect-[4/5] w-full cursor-pointer overflow-hidden rounded-2xl bg-surface-2 text-left"
+        className="relative block aspect-[4/5] w-full overflow-hidden rounded-2xl bg-surface-2"
       >
         <Image
           src={cover.src}
@@ -42,17 +42,13 @@ export function ProductCard({
             Detail
           </span>
         </div>
-      </button>
+      </Link>
 
       <div className="flex flex-1 flex-col px-2 pt-4 pb-2">
         <h3 className="line-clamp-1 font-serif text-2xl leading-snug font-semibold">
-          <button
-            type="button"
-            onClick={() => onSelect?.(product)}
-            className="cursor-pointer text-left transition-colors hover:text-accent"
-          >
+          <Link href={href} className="transition-colors hover:text-accent">
             {product.name}
-          </button>
+          </Link>
         </h3>
         <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted sm:text-sm">
           {product.shortSummary}
@@ -81,15 +77,14 @@ export function ProductCard({
             <span>Minta Penawaran</span>
             <span className="sr-only"> {product.name} via WhatsApp (membuka tab baru)</span>
           </a>
-          <button
-            type="button"
-            onClick={() => onSelect?.(product)}
+          <Link
+            href={href}
             aria-label={`Lihat detail ${product.name}`}
-            className="inline-flex min-h-10 cursor-pointer items-center justify-center gap-1 rounded-full border border-line bg-background/60 px-4 py-2 text-xs font-semibold whitespace-nowrap transition-colors hover:border-accent hover:text-accent"
+            className="inline-flex min-h-10 items-center justify-center gap-1 rounded-full border border-line bg-background/60 px-4 py-2 text-xs font-semibold whitespace-nowrap transition-colors hover:border-accent hover:text-accent"
           >
             <span>Detail</span>
             <ArrowIcon className="size-3.5 shrink-0" />
-          </button>
+          </Link>
         </div>
       </div>
     </article>

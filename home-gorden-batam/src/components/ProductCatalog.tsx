@@ -4,7 +4,6 @@
 import { useState } from 'react';
 import type { Category, CategorySlug, Product } from '@/data/products';
 import { ProductCard } from './ProductCard';
-import { ProductDetailModal } from './ProductDetailModal';
 
 type Props = {
   products: readonly Product[];
@@ -15,7 +14,6 @@ type Filter = CategorySlug | 'semua';
 
 export function ProductCatalog({ products, categories }: Props) {
   const [active, setActive] = useState<Filter>('semua');
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const visible = active === 'semua' ? products : products.filter((p) => p.category === active);
   const options: { value: Filter; label: string; count: number }[] = [
@@ -54,12 +52,10 @@ export function ProductCatalog({ products, categories }: Props) {
       <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((p) => (
           <li key={p.slug}>
-            <ProductCard product={p} onSelect={(prod) => setSelectedProduct(prod)} />
+            <ProductCard product={p} />
           </li>
         ))}
       </ul>
-
-      <ProductDetailModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </div>
   );
 }
