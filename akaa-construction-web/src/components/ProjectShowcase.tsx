@@ -120,8 +120,23 @@ export function ProjectShowcase({ eyebrow, title, text, images, waHref }: Props)
                 Desain 3D
               </span>
             )}
+            {/* Keterangan di dalam foto: gradasi gelap + label nomor, ala caption majalah */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-night/85 via-night/40 to-transparent"
+            />
+            <figcaption
+              key={`cap-${current.src}`}
+              className="showcase-fade absolute inset-x-4 bottom-4 flex items-end gap-3 text-white sm:inset-x-6 sm:bottom-6"
+            >
+              <span className="shrink-0 rounded-full bg-accent px-2.5 py-1 font-display text-xs font-extrabold text-accent-ink tabular-nums">
+                {pad(index + 1)}
+              </span>
+              <span className="max-w-md text-sm leading-snug font-semibold text-balance drop-shadow sm:text-base">
+                {current.alt}
+              </span>
+            </figcaption>
           </div>
-          <figcaption className="mt-3 text-sm text-muted">{current.alt}</figcaption>
         </figure>
       </div>
 
