@@ -4,19 +4,12 @@ import { JsonLd } from '@/components/JsonLd';
 import { ProjectGallery } from '@/components/ProjectGallery';
 import { SectionHeading } from '@/components/SectionHeading';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
-import { latestDate, latestProjects, projects } from '@/data/projects';
+import { latestProjects, projects } from '@/data/projects';
 import { siteConfig } from '@/lib/config';
 
 const title = 'Galeri Pemasangan Gorden & Blinds di Batam';
 const description =
   'Foto dan video asli hasil pemasangan gorden, vitrase, blinds, dan wallpaper oleh Home Gorden Batam di rumah, apartemen, dan ruko di Batam.';
-
-const longDate = (iso: string) =>
-  new Date(`${iso}T00:00:00`).toLocaleDateString('id-ID', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
 
 export const metadata: Metadata = {
   title,
@@ -81,11 +74,9 @@ export default function GaleriPage() {
         </div>
 
         {latestProjects.length > 0 && (
-          <p className="mt-8 inline-flex flex-wrap items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-sm">
-            <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-bold tracking-wider text-[#5c4011] uppercase shadow-sm">
-              Terbaru
-            </span>
-            {latestProjects.length} foto pemasangan baru ditambahkan {longDate(latestDate)}
+          // Cukup label "Terbaru" (tanpa tanggal agar tidak terkesan basi); foto terbaru ada di urutan depan
+          <p className="mt-8 inline-flex rounded-full bg-white px-3 py-1 text-xs font-bold tracking-wider text-[#5c4011] uppercase shadow-sm">
+            Terbaru
           </p>
         )}
 
