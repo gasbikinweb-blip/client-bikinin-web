@@ -34,6 +34,16 @@ export const metadata: Metadata = {
     'jasa interior rumah Jabodetabek',
   ],
   alternates: { canonical: '/' },
+  // Ikon dari paket favicon AKAA (public/): huruf "A"
+  icons: {
+    icon: [
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+  },
+  manifest: '/site.webmanifest',
   // Verifikasi Google Search Console (meta tag google-site-verification)
   verification: { google: 'RnbozMo0GR_fvTvogpUqpc9lo-DzRboMsib0EYCFst0' },
   openGraph: {
