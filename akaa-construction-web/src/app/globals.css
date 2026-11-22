@@ -193,6 +193,17 @@ details > summary::-webkit-details-marker {
   display: none;
 }
 
+/* Hero galeri proyek: foto baru muncul dengan crossfade + zoom halus */
+@keyframes showcase-fade {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+}
+.showcase-fade {
+  animation: showcase-fade 0.7s ease-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
