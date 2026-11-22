@@ -92,13 +92,13 @@ export default async function ProjectPage({ params }: Props) {
 
       {p.progress && p.progress.length > 0 && (
         <section className="border-y border-line bg-surface-2/50">
-          <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:py-20">
+          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-20">
             <SectionTitle
               eyebrow="Progress"
               title="Timeline pengerjaan"
               text={`${p.progress.length} update progress dari ${longDate(p.progress[0]!.date)} sampai ${longDate(p.progress[p.progress.length - 1]!.date)}.`}
             />
-            <ol className="mt-10 border-l-2 border-line">
+            <ol className="mt-10 max-w-3xl border-l-2 border-line">
               {p.progress.map((u, idx) => (
                 <li key={`${u.date}-${idx}`} className="reveal relative pb-10 pl-6 last:pb-0">
                   <span className="absolute top-1.5 -left-[7px] size-3 rounded-full border-2 border-surface bg-accent" />
