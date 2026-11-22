@@ -19,6 +19,14 @@
   --navy: #1b2e47;
   --sage: #4f6e55;
   --line: rgb(28 25 23 / 0.12);
+  /* Pratinjau chat ala WhatsApp (warna resmi WA mode terang) */
+  --wa-header: #008069;
+  --wa-header-ink: #ffffff;
+  --wa-chat: #efeae2;
+  --wa-bubble: #d9fdd3;
+  --wa-bubble-ink: #111b21;
+  --wa-meta: #667781;
+  --wa-chip: #ffffff;
 }
 
 :root[data-theme='dark'],
@@ -34,6 +42,14 @@
   --navy: #1d324c;
   --sage: #8fae94;
   --line: rgb(245 239 230 / 0.13);
+  /* Pratinjau chat ala WhatsApp (mode gelap) */
+  --wa-header: #202c33;
+  --wa-header-ink: #e9edef;
+  --wa-chat: #0b141a;
+  --wa-bubble: #005c4b;
+  --wa-bubble-ink: #e9edef;
+  --wa-meta: #8696a0;
+  --wa-chip: #182229;
 }
 
 :root[data-theme='dark'] {
@@ -56,6 +72,13 @@ html.theme-transition *::after {
 }
 
 @theme inline {
+  --color-wa-header: var(--wa-header);
+  --color-wa-header-ink: var(--wa-header-ink);
+  --color-wa-chat: var(--wa-chat);
+  --color-wa-bubble: var(--wa-bubble);
+  --color-wa-bubble-ink: var(--wa-bubble-ink);
+  --color-wa-meta: var(--wa-meta);
+  --color-wa-chip: var(--wa-chip);
   --color-background: var(--background);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);

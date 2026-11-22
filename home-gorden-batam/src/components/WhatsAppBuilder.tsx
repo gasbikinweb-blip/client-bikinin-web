@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { getAllProducts } from '@/data/products';
 import { batamAreas } from '@/data/site';
@@ -364,18 +365,65 @@ export function WhatsAppBuilder({
         </div>
       </div>
 
-      {/* Pratinjau Pesan Otomatis */}
-      <div className="mt-6 rounded-2xl border border-accent/25 bg-background/80 p-4 sm:p-5">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="text-xs font-semibold tracking-wider text-accent uppercase">
-            Pratinjau Pesan Otomatis
-          </span>
-          <span className="text-xs text-muted">Tidak ada data yang disimpan di server</span>
+      {/* Pratinjau Pesan Otomatis: tampil seperti layar chat WhatsApp (ikut mode terang/gelap) */}
+      <figure
+        aria-label="Pratinjau pesan WhatsApp"
+        className="mt-6 overflow-hidden rounded-2xl border border-line shadow-sm"
+      >
+        {/* Header chat */}
+        <div className="flex items-center gap-3 bg-wa-header px-4 py-2.5 text-wa-header-ink">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            className="size-5 shrink-0 opacity-90"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+          <Image
+            src="/brand/logo.webp"
+            alt=""
+            width={40}
+            height={40}
+            className="size-9 shrink-0 rounded-full bg-white object-contain"
+          />
+          <div className="min-w-0 leading-tight">
+            <p className="truncate text-sm font-semibold">{siteConfig.name}</p>
+            <p className="truncate text-xs opacity-80">Akun bisnis · Pratinjau pesan otomatis</p>
+          </div>
         </div>
-        <p className="mt-2 font-sans text-sm leading-relaxed break-words text-foreground sm:text-base">
-          &ldquo;{compiledMessage}&rdquo;
-        </p>
-      </div>
+
+        {/* Area chat */}
+        <div className="bg-wa-chat px-3 py-4 sm:px-5">
+          <p className="mx-auto w-fit rounded-md bg-wa-chip px-2.5 py-1 text-[11px] font-medium text-wa-meta shadow-sm">
+            Hari ini
+          </p>
+          <div className="relative mt-3 ml-auto w-fit max-w-[88%] rounded-lg rounded-tr-none bg-wa-bubble px-3 pt-2 pb-1.5 text-wa-bubble-ink shadow-sm">
+            {/* Ekor gelembung */}
+            <span
+              aria-hidden="true"
+              className="absolute top-0 -right-2 size-0 border-t-[10px] border-r-[10px] border-t-wa-bubble border-r-transparent"
+            />
+            <p className="font-sans text-sm leading-relaxed break-words whitespace-pre-line sm:text-[15px]">
+              {compiledMessage}
+            </p>
+            <p className="mt-1 flex items-center justify-end gap-1 text-[11px] text-wa-meta">
+              <span>Pesan siap dikirim</span>
+              <svg aria-hidden="true" viewBox="0 0 18 18" className="size-3.5 fill-[#53bdeb]">
+                <path d="M17.39 3.83a.75.75 0 0 0-1.06.04l-6.9 7.5-1.1-1.2a.75.75 0 1 0-1.1 1.02l1.65 1.8a.75.75 0 0 0 1.1 0l7.45-8.1a.75.75 0 0 0-.04-1.06ZM12.39 3.83a.75.75 0 0 0-1.06.04l-6.9 7.5L2.04 8.7a.75.75 0 1 0-1.08 1.04l2.95 3.05a.75.75 0 0 0 1.09-.01l7.45-8.1a.75.75 0 0 0-.06-1.06Z" />
+              </svg>
+            </p>
+          </div>
+        </div>
+
+        <figcaption className="bg-wa-chip px-4 py-2 text-center text-[11px] text-wa-meta">
+          Tidak ada data yang disimpan di server
+        </figcaption>
+      </figure>
 
       {errorMsg && (
         <p role="alert" className="mt-3 text-sm font-medium text-accent">
