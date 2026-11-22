@@ -30,6 +30,12 @@ export function Footer() {
             WA {siteConfig.waDisplay}
             <span className="sr-only"> (tab baru)</span>
           </a>
+          <a
+            href={`mailto:${site.email}`}
+            className="flex min-h-11 items-center break-all hover:text-accent"
+          >
+            {site.email}
+          </a>
         </div>
         <nav aria-label="Layanan" className="text-sm">
           <p className="font-bold text-white">Layanan</p>
