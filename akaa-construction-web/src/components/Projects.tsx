@@ -4,12 +4,20 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowIcon, CloseIcon, LinkIcon, WhatsAppIcon } from './icons';
+import { ArrowIcon, CloseIcon, LinkIcon, ServiceIcon, WhatsAppIcon } from './icons';
 import { projects, projectSlugs, statusLabel, workTypeLabel } from '@/data/projects';
 import type { Project, ProjectImage, WorkType } from '@/data/types';
 import { buildWhatsAppLink, projectMessage, projectUrl } from '@/lib/whatsapp';
 
 const PREFIX = '#proyek-';
+
+// Ikon bulat di pojok kartu sesuai jenis pekerjaan
+const workIcon: Record<WorkType, string> = {
+  'bangun-baru': 'rumah',
+  renovasi: 'renovasi',
+  interior: 'interior',
+  taman: 'taman',
+};
 const types = (Object.keys(workTypeLabel) as WorkType[]).filter((t) =>
   projects.some((p) => p.workType === t),
 );
@@ -210,29 +218,34 @@ export function Projects() {
         <p className="sr-only" aria-live="polite">
           {list.length} proyek ditampilkan
         </p>
-        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {list.map((p) => (
             <li
               key={p.slug}
-              className="animate-in group relative overflow-hidden rounded-lg border border-line bg-surface"
+              className="animate-in group relative aspect-[4/5] overflow-hidden rounded-3xl bg-night text-white shadow-sm"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-surface-2">
-                <Image
-                  src={p.cover.thumb}
-                  alt={p.cover.alt}
-                  fill
-                  sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition duration-500 group-hover:scale-105"
-                />
-                <span className="absolute top-3 left-3">
-                  <StatusBadge status={p.status} />
-                </span>
-              </div>
-              <div className="p-5">
-                <p className="text-xs font-bold tracking-widest text-accent-text uppercase">
+              <Image
+                src={p.cover.thumb}
+                alt={p.cover.alt}
+                fill
+                sizes="(min-width: 1280px) 300px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover transition duration-700 group-hover:scale-105"
+              />
+              <span className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5" />
+
+              {/* Ikon jenis pekerjaan + status */}
+              <span className="absolute top-4 left-4 grid size-11 place-items-center rounded-full bg-white/90 text-night shadow">
+                <ServiceIcon name={workIcon[p.workType]} className="size-5" />
+              </span>
+              <span className="absolute top-4 right-4">
+                <StatusBadge status={p.status} />
+              </span>
+
+              <div className="absolute inset-x-0 bottom-0 p-5">
+                <p className="text-[11px] font-bold tracking-widest text-accent uppercase">
                   {workTypeLabel[p.workType]} · {p.year}
                 </p>
-                <h3 className="mt-2 font-display text-xl leading-tight font-extrabold uppercase">
+                <h3 className="mt-1.5 font-display text-xl leading-tight font-extrabold uppercase [overflow-wrap:anywhere]">
                   <button
                     type="button"
                     onClick={(e) => open(p.slug, e.currentTarget)}
@@ -241,10 +254,18 @@ export function Projects() {
                     {p.name}
                   </button>
                 </h3>
-                <p className="mt-1 text-sm text-muted">
-                  {p.location ?? 'Jabodetabek'}
-                  {p.progress && ` · ${p.progress.length} update progress`}
-                </p>
+                <div className="mt-2 flex items-end justify-between gap-3">
+                  <p className="line-clamp-2 text-sm leading-snug text-white/80">
+                    {p.scope ?? p.location ?? 'Jabodetabek'}
+                    {p.progress && ` · ${p.progress.length} update progress`}
+                  </p>
+                  <span
+                    aria-hidden="true"
+                    className="grid size-10 shrink-0 place-items-center rounded-full bg-white text-night transition group-hover:bg-accent group-hover:text-accent-ink"
+                  >
+                    <ArrowIcon className="size-4 -rotate-45 transition-transform group-hover:rotate-0" />
+                  </span>
+                </div>
               </div>
             </li>
           ))}
