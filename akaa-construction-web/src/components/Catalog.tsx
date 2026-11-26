@@ -57,8 +57,8 @@ export function Catalog() {
               <p className="text-xs font-bold tracking-[0.2em] text-accent uppercase">{main.tag}</p>
               <h3 className="mt-2 font-display text-3xl font-black uppercase">{main.name}</h3>
               {main.price && (
-                <p className="mt-3 flex items-baseline gap-2">
-                  <span className="font-display text-5xl font-black text-accent">
+                <p className="mt-3 flex flex-wrap items-baseline gap-x-2">
+                  <span className="font-display text-4xl font-black text-accent min-[360px]:text-5xl">
                     {rupiah(main.price.amount)}
                   </span>
                   <span className="text-white/70">/{main.price.unit}</span>

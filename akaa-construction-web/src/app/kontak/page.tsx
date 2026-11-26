@@ -6,6 +6,9 @@ import { ConsultBuilder } from '@/components/ConsultBuilder';
 import { PageHeader } from '@/components/PageParts';
 import { Contact, Faq } from '@/components/Sections';
 import { site } from '@/data/site';
+import { projects } from '@/data/projects';
+
+const headerImage = projects.find((p) => p.slug === 'gazebo-interior-cafe-jakarta')?.cover;
 
 export const metadata: Metadata = pageMetadata({
   title: 'Kontak & Konsultasi Gratis | AKAA Construction',
@@ -33,6 +36,7 @@ export default function KontakPage() {
         eyebrow="Kontak"
         title="Konsultasi gratis"
         text="Isi kebutuhan Anda, pesan WhatsApp tersusun otomatis. Atau datang langsung ke kantor kami."
+        image={headerImage}
       />
       <ConsultBuilder />
       <Contact />

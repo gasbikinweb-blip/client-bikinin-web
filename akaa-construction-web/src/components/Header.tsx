@@ -3,7 +3,7 @@
 // Navigasi sticky: link aktif mengikuti halaman yang sedang dibuka, menu HP berupa panel.
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Logo } from './Logo';
 import { ThemeToggle } from './ThemeToggle';
 import { navLinks } from '@/data/site';
@@ -13,6 +13,14 @@ export function Header() {
   // Tanpa garis miring di akhir agar /proyek/ dan /proyek sama
   const path = usePathname().replace(/\/$/, '') || '/';
   const active = navLinks.find((l) => l.href === path)?.href ?? '';
+
+  // Menu HP tertutup dengan tombol Escape
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
 
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-background/90 backdrop-blur-md">

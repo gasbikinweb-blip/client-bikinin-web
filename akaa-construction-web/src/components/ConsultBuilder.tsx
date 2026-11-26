@@ -148,22 +148,22 @@ export function ConsultBuilder() {
   };
 
   return (
-    <section id="konsultasi" className="relative border-t border-white/10 bg-night text-white">
+    <section id="konsultasi" className="relative border-t border-line bg-surface-2 text-foreground">
       <div className="blueprint absolute inset-0 opacity-20" aria-hidden="true" />
       <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-[1fr_1.3fr]">
         {/* HP: judul -> form -> pratinjau; desktop: judul + pratinjau di kiri (sticky) */}
         <div className="contents lg:sticky lg:top-24 lg:block lg:self-start">
           <div className="reveal">
-            <p className="eyebrow !text-accent">Konsultasi &amp; Survei</p>
+            <p className="eyebrow !text-accent-text">Konsultasi &amp; Survei</p>
             <h2 className="mt-4 font-display text-4xl leading-[1.05] font-extrabold uppercase sm:text-5xl">
               Ceritakan rencana Anda
             </h2>
-            <p className="mt-4 text-white/70">
+            <p className="mt-4 text-muted">
               Isi singkat rencana Anda, pesan WhatsApp akan tersusun otomatis. Data tidak disimpan
               di website.
             </p>
           </div>
-          <div className="order-last overflow-hidden lg:order-none lg:mt-8 rounded-2xl border border-white/10 bg-surface text-foreground shadow-2xl">
+          <div className="order-last overflow-hidden lg:order-none lg:mt-8 rounded-2xl border border-line bg-surface text-foreground shadow-2xl">
             <p className="flex items-center gap-2 bg-[#075e54] px-4 py-3 text-sm font-bold text-white">
               <WhatsAppIcon className="size-4" /> Pratinjau pesan WhatsApp
             </p>

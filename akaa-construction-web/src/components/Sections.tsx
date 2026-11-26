@@ -152,9 +152,7 @@ export function Services() {
   return (
     <section id="layanan" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28">
       <div className="reveal grid items-start gap-6 lg:grid-cols-[1fr_2.4fr]">
-        <span className="inline-flex w-fit items-center gap-2 rounded-full border border-line px-4 py-1.5 text-xs font-bold tracking-widest uppercase">
-          Layanan <ArrowIcon className="size-3" />
-        </span>
+        <p className="eyebrow lg:mt-3">Layanan</p>
         <div>
           <h2 className="font-display text-4xl leading-[1.05] font-extrabold uppercase sm:text-5xl">
             Satu tim untuk rumah impian Anda
@@ -502,7 +500,7 @@ export function Contact() {
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="block font-bold">{r.title}</span>
-                    <span className="block truncate text-sm text-muted">{r.sub}</span>
+                    <span className="block text-sm break-words text-muted">{r.sub}</span>
                   </span>
                   <ArrowIcon className="size-4 shrink-0 text-muted transition group-hover:translate-x-1 group-hover:text-foreground" />
                   {r.external && <span className="sr-only"> (tab baru)</span>}
@@ -513,17 +511,17 @@ export function Contact() {
           <Socials className="mt-5" />
         </div>
 
-        {/* Kanan: kartu gelap dengan peta lokasi */}
-        <div className="reveal flex flex-col overflow-hidden rounded-[28px] bg-night text-white">
+        {/* Kanan: kartu kuning (warna brand) dengan peta lokasi */}
+        <div className="reveal flex flex-col overflow-hidden rounded-[28px] bg-accent text-accent-ink">
           <div className="p-6 sm:p-8">
             <h2 className="font-display text-3xl leading-tight font-extrabold sm:text-4xl">
               Mampir ke kantor kami, atau kami yang datang ke lokasi Anda
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-white/70">{site.office}</p>
+            <p className="mt-3 text-sm leading-relaxed opacity-80">{site.office}</p>
             <ul className="mt-5 grid gap-2 text-sm sm:grid-cols-3">
               {['Free konsultasi', 'Free survei lokasi', `Melayani ${site.area}`].map((t) => (
                 <li key={t} className="flex items-center gap-2">
-                  <CheckIcon className="size-4 text-accent" /> {t}
+                  <CheckIcon className="size-4" /> {t}
                 </li>
               ))}
             </ul>
@@ -540,7 +538,7 @@ export function Contact() {
             <a
               href={buildWhatsAppLink(generalMessage)}
               {...ext}
-              className="inline-flex min-h-12 items-center gap-2 rounded-full bg-accent px-6 font-bold text-accent-ink hover:brightness-95"
+              className="inline-flex min-h-12 items-center gap-2 rounded-full bg-night px-6 font-bold text-white hover:brightness-125"
             >
               <WhatsAppIcon className="size-5" /> Jadwalkan Survei
               <span className="sr-only"> (tab baru)</span>
@@ -548,7 +546,7 @@ export function Contact() {
             <a
               href={site.mapsUrl}
               {...ext}
-              className="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/30 px-6 font-bold hover:border-white"
+              className="inline-flex min-h-12 items-center gap-2 rounded-full border border-accent-ink/40 px-6 font-bold hover:border-accent-ink hover:bg-accent-ink/5"
             >
               <PinIcon className="size-5" /> Buka di Google Maps
               <span className="sr-only"> (tab baru)</span>

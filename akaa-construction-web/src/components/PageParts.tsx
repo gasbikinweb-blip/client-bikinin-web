@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowIcon } from './icons';
 import { projects } from '@/data/projects';
+import { ProjectCarousel } from './ProjectCarousel';
 
 /** Banner atas halaman: satu-satunya h1 di halaman tersebut */
 export function PageHeader({
@@ -34,7 +35,7 @@ export function PageHeader({
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28">
         <p className="eyebrow animate-in !text-accent">{eyebrow}</p>
         <h1
-          className="animate-in mt-4 max-w-3xl font-display text-4xl leading-[1.05] font-black uppercase sm:text-6xl"
+          className="animate-in mt-4 max-w-3xl font-display text-[length:clamp(1.75rem,9vw,2.25rem)] leading-[1.05] font-black uppercase [overflow-wrap:anywhere] sm:text-6xl"
           style={{ '--delay': '120ms' } as React.CSSProperties}
         >
           {title}
@@ -54,9 +55,17 @@ export function PageHeader({
 
 /** 3 proyek unggulan di beranda; klik membuka modal di halaman Proyek */
 export function FeaturedProjects() {
-  const list = projects.filter((p) => p.featured).slice(0, 3);
+  const list = projects
+    .filter((p) => p.featured)
+    .map((p) => ({
+      slug: p.slug,
+      name: p.name,
+      meta: [p.year, p.location].filter(Boolean).join(' · '),
+      photos: p.images.length,
+      cover: p.cover,
+    }));
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28">
+    <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 sm:py-28">
       <div className="reveal flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl">
           <p className="eyebrow">Proyek pilihan</p>
@@ -66,40 +75,12 @@ export function FeaturedProjects() {
         </div>
         <Link
           href="/proyek"
-          className="inline-flex min-h-12 items-center gap-2 rounded-full border border-line px-6 font-bold hover:border-accent"
+          className="group inline-flex items-center gap-2 border-b-2 border-accent pb-1 text-sm font-bold text-accent-text"
         >
-          Semua proyek <ArrowIcon className="size-5" />
+          Lihat semua proyek <ArrowIcon className="size-5" />
         </Link>
       </div>
-      <ul data-stagger className="mt-10 grid gap-5 md:grid-cols-3">
-        {list.map((p) => (
-          <li key={p.slug} className="reveal">
-            <a
-              href={`/proyek#proyek-${p.slug}`}
-              className="group block overflow-hidden rounded-2xl border border-line bg-surface-2/40 transition hover:border-accent"
-            >
-              <span className="relative block aspect-[4/3] overflow-hidden">
-                <Image
-                  src={p.cover.src}
-                  alt={p.cover.alt}
-                  fill
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </span>
-              <span className="block p-5">
-                <span className="text-xs font-bold tracking-widest text-accent-text uppercase">
-                  {p.year}
-                  {p.location && ` · ${p.location}`}
-                </span>
-                <span className="mt-1 block font-display text-xl font-extrabold uppercase">
-                  {p.name}
-                </span>
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <ProjectCarousel items={list} />
     </section>
   );
 }
