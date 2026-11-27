@@ -28,7 +28,8 @@ function load(slug: string) {
   const service = page && services.find((s) => s.id === page.serviceId);
   if (!page || !service) return null;
   const list = projects.filter((p) => p.workType === page.workType);
-  return { page, service, list };
+  const local = 'local' in page ? page.local : undefined;
+  return { page, service, list, local };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -36,7 +37,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!d) return {};
   return pageMetadata({
     title: `${d.page.keyword} Cibubur & ${site.area} | AKAA Construction`,
-    description: `${d.service.description} Free konsultasi & survei lokasi, RAB transparan.`,
+    description: d.local
+      ? `${d.local.title} dari kantor di Kota Wisata. Tambah lantai, dapur, atap bocor, fasad. Free konsultasi & survei, RAB transparan.`
+      : `${d.service.description} Free konsultasi & survei lokasi, RAB transparan.`,
     path: `/layanan/${d.page.slug}`,
     image: d.list[0]?.cover,
   });
@@ -45,7 +48,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ServicePage({ params }: Props) {
   const d = load((await params).id);
   if (!d) notFound();
-  const { page, service, list } = d;
+  const { page, service, list, local } = d;
+  const faqList = local ? [...local.faqs, ...pageFaqs] : pageFaqs;
   const crumbs = [
     { name: 'Layanan', path: '/layanan' },
     { name: service.name, path: `/layanan/${page.slug}` },
@@ -56,8 +60,8 @@ export default async function ServicePage({ params }: Props) {
       <JsonLd data={breadcrumbList(crumbs)} />
       <PageHeader
         eyebrow={`Layanan · ${site.area}`}
-        title={`${page.keyword} di ${site.area}`}
-        text={service.description}
+        title={local ? local.title : `${page.keyword} di ${site.area}`}
+        text={local ? local.intro : service.description}
         image={list[0]?.cover}
       />
       <Breadcrumbs crumbs={crumbs} />
@@ -89,6 +93,27 @@ export default async function ServicePage({ params }: Props) {
         </div>
       </section>
 
+      {local && (
+        <section className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:pb-20">
+          <SectionTitle
+            eyebrow="Cibubur & sekitarnya"
+            title={local.heading}
+            text={`Pekerjaan ${service.name.toLowerCase()} yang paling sering diminta pemilik rumah di Cibubur:`}
+          />
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {local.items.map((it) => (
+              <li
+                key={it}
+                className="reveal flex items-start gap-3 rounded-2xl border border-line bg-surface p-5 font-semibold"
+              >
+                <CheckIcon className="mt-1 size-5 shrink-0 text-accent-text" />
+                {it}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section className="border-t border-line bg-surface-2/50">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-20">
           <SectionTitle
@@ -107,7 +132,7 @@ export default async function ServicePage({ params }: Props) {
       <section className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 lg:py-20">
         <SectionTitle eyebrow="FAQ" title="Pertanyaan umum" />
         <div className="mt-8 divide-y divide-line border-y border-line">
-          {pageFaqs.map((f) => (
+          {faqList.map((f) => (
             <details key={f.q} className="group">
               <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold">
                 {f.q}

@@ -48,6 +48,15 @@ export default async function AreaPage({ params }: Props) {
         image={list[0]?.cover}
       />
       <Breadcrumbs crumbs={crumbs} />
+      {a.slug === 'cibubur' && (
+        <p className="mx-auto w-full max-w-7xl px-4 pt-10 text-lg leading-relaxed sm:px-6">
+          Mau renovasi rumah? Lihat{' '}
+          <Link href="/layanan/renovasi" className="font-semibold text-accent-text underline">
+            jasa renovasi rumah Cibubur
+          </Link>{' '}
+          dari AKAA: tambah lantai, dapur, atap bocor, sampai fasad.
+        </p>
+      )}
 
       <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-20">
         <SectionTitle
